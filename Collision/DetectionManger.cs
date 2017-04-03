@@ -149,7 +149,8 @@ namespace Engine.Managers.Collision
                         //  a.Hits[i].Mind.Velocity += (satTest.mtvRet() * a.Hits[i].Mind.Mass);
                         // b.Hits[x].Mind.Velocity -= (satTest.mtvRet() * b.Hits[x].Mind.Mass);
 
-                        CallSAT(a, b, satTest.mtvRet());
+                        CallSAT(a, b, -satTest.mtvRet());
+                        CallSAT(a, b, ImpulseApplication(a.Hits[i], b.Hits[x]));
                         //minimumMovement(a.Hits[i], b.Hits[x]);
                         //a.ApplyImpulse(-ImpulseApplication(a.Hits[i], b.Hits[x]));
                         //b.ApplyImpulse(ImpulseApplication(a.Hits[i], b.Hits[x]));
@@ -174,9 +175,10 @@ namespace Engine.Managers.Collision
 
             //Vector2 cNormal = a.Centre - b.Centre; //might work
 
-            Vector2 cNormal = a.Centre - b.Centre;
-
-            float cVelocity = Vector2.Dot(cNormal, a.Velocity - b.Velocity);
+            //Vector2 cNormal = a.Centre - b.Centre;
+            Vector2 combVel = a.Velocity - b.Velocity;
+            Vector2 cNormal = Vector2.Normalize(combVel);
+            float cVelocity = Vector2.Dot(a.Velocity - b.Velocity, cNormal);
             cNormal *= cVelocity;
 
             return cNormal;

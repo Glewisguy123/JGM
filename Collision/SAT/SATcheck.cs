@@ -118,6 +118,8 @@ namespace ADS.Collision.SAT
             max = d;
             for (int i = 0; i < myEnt.Points.Count; i++)
             {
+                //Find the minimum point along the axis that the shape can be found.
+                //Set the min and max accordingly
                 d = Vector2.Dot(myEnt.Points[i], axis);
                 if (d < min)
                 {
@@ -135,12 +137,15 @@ namespace ADS.Collision.SAT
 
         public float IntervalDistance(float minA, float maxA, float minB, float maxB)
         {
+            //whichever is lower on the axis
             if (minA < minB)
             {
+                //Return the one on the right minus the other
                 return minB - maxA;
             }
             else
             {
+                //Return the one on the right minus the other
                 return minA - maxB;
             }
 
@@ -148,7 +153,7 @@ namespace ADS.Collision.SAT
 
         public Vector2 mtvRet()
         {
-            //Console.WriteLine("mtv is " + MinimumTranslationVector);
+            //Return the minimum distance required to prevent shapes from intersecting
             return MinimumTranslationVector;
         }
     }
