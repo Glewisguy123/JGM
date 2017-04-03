@@ -1,0 +1,187 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{AAA256DB-95CB-457E-A74D-BAAB7B287E7B}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ADS</RootNamespace>
+    <AssemblyName>ADS</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MonoGamePlatform>Windows</MonoGamePlatform>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\$(MonoGamePlatform)\$(Platform)\$(Configuration)\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;WINDOWS</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\$(MonoGamePlatform)\$(Platform)\$(Configuration)\</OutputPath>
+    <DefineConstants>TRACE;WINDOWS</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>AceIcon1</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetZone>LocalIntranet</TargetZone>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>false</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Camera2D\Camera.cs" />
+    <Compile Include="Collision\SAT\Hitbox.cs" />
+    <Compile Include="Collision\SAT\SATcheck.cs" />
+    <Compile Include="Constants.cs" />
+    <Compile Include="Entities\Entity.cs" />
+    <Compile Include="Entities\Interfaces\IProjectile.cs" />
+    <Compile Include="Entities\Interfaces\IMind.cs" />
+    <Compile Include="Entities\Mind.cs" />
+    <Compile Include="Entities\Platformer\pEntity.cs" />
+    <Compile Include="Entities\Platformer\PlayerMind.cs" />
+    <Compile Include="Entities\Platformer\TestEntity.cs" />
+    <Compile Include="Entities\Platformer\TestMind.cs" />
+    <Compile Include="Entities\Steering\Arrival.cs" />
+    <Compile Include="Entities\Steering\Flee.cs" />
+    <Compile Include="Entities\Steering\Flock.cs" />
+    <Compile Include="Entities\Steering\ISteeringBehaviour.cs" />
+    <Compile Include="Entities\Steering\Seek.cs" />
+    <Compile Include="Entities\Steering\SteeringBehaviour.cs" />
+    <Compile Include="Entities\Steering\SteeringEntity.cs" />
+    <Compile Include="Entities\Steering\SteeringMind.cs" />
+    <Compile Include="Entities\Steering\Wander.cs" />
+    <Compile Include="Events\ButtonEvent.cs" />
+    <Compile Include="Events\CollisionEvent\CollisionEventArgs.cs" />
+    <Compile Include="Events\CollisionEvent\CollisionHandler.cs" />
+    <Compile Include="Events\CollisionEvent\SATEventArgs.cs" />
+    <Compile Include="Events\KeyboardEvent\KeyEventArgs.cs" />
+    <Compile Include="Events\KeyboardEvent\KeyHandler.cs" />
+    <Compile Include="Events\KeyboardEvent\KeyListener.cs" />
+    <Compile Include="Events\MouseEvent\MouseEventArgs.cs" />
+    <Compile Include="Events\MouseEvent\MouseListener.cs" />
+    <Compile Include="Events\MouseEvent\MouseHandler.cs" />
+    <Compile Include="Grid\AStarGridSearch.cs" />
+    <Compile Include="Grid\AStarNode.cs" />
+    <Compile Include="Grid\Grid.cs" />
+    <Compile Include="Grid\IAStarNode.cs" />
+    <Compile Include="Grid\Node.cs" />
+    <Compile Include="Render\IDrawable.cs" />
+    <Compile Include="sLocator\IService.cs" />
+    <Compile Include="sLocator\IServiceLocator.cs" />
+    <Compile Include="sLocator\Locator.cs" />
+    <Compile Include="AnimationManager.cs" />
+    <Compile Include="AStar\AstarPath.cs" />
+    <Compile Include="Behaviour\IBehaviourManager.cs" />
+    <Compile Include="Behaviour\SteeringManager.cs" />
+    <Compile Include="Collision\AABB.cs" />
+    <Compile Include="Collision\IDetectionManager.cs" />
+    <Compile Include="Collision\TranslationVector.cs" />
+    <Compile Include="Behaviour\BehaviourManager.cs" />
+    <Compile Include="EntityRelated\IEntityManager.cs" />
+    <Compile Include="Render\IRenderManager.cs" />
+    <Compile Include="CamManage\CameraManager.cs" />
+    <Compile Include="Collision\DetectionManger.cs" />
+    <Compile Include="Collision\ICollidable.cs" />
+    <Compile Include="EntityRelated\EntityManager.cs" />
+    <Compile Include="sLocator\IUpdService.cs" />
+    <Compile Include="Render\RenderManager.cs" />
+    <Compile Include="CamManage\ICameraManager.cs" />
+    <Compile Include="Sound\ISoundManager.cs" />
+    <Compile Include="Sound\SoundEventArgs.cs" />
+    <Compile Include="Sound\SoundHandler.cs" />
+    <Compile Include="Sound\SoundManager.cs" />
+    <Compile Include="State\Fader.cs" />
+    <Compile Include="State\sManagerArgs.cs" />
+    <Compile Include="States\GrantsPlayground\GrantsPlayground.cs" />
+    <Compile Include="States\Levels\AStarDemo.cs" />
+    <Compile Include="States\Levels\FSMDemo.cs" />
+    <Compile Include="States\Levels\SATDemo.cs" />
+    <Compile Include="States\Levels\SteeringDemo.cs" />
+    <Compile Include="States\Levels\SwarmTest.cs" />
+    <Compile Include="States\Menu\Menu.cs" />
+    <Compile Include="States\Menu\MenuOption.cs" />
+    <Compile Include="States\Engine\BaseScreen.cs" />
+    <Compile Include="Game1.cs" />
+    <Compile Include="Entities\Interfaces\IEntity.cs" />
+    <Compile Include="Input\IInputManager.cs" />
+    <Compile Include="Input\InputManager.cs" />
+    <Compile Include="Resource\IResourceLoader.cs" />
+    <Compile Include="States\GameOptions\GameOptions.cs" />
+    <Compile Include="States\GameOptions\Option.cs" />
+    <Compile Include="States\Engine\IScreen.cs" />
+    <Compile Include="State\IScreenManager.cs" />
+    <Compile Include="States\Levels\Level1.cs" />
+    <Compile Include="States\Levels\Level2.cs" />
+    <Compile Include="States\Menu\MainMenu.cs" />
+    <Compile Include="States\Menu\MenuItem.cs" />
+    <Compile Include="States\Menu\OptionItem.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resource\ResourceLoader.cs" />
+    <Compile Include="State\ScreenManager.cs" />
+    <Compile Include="States\Engine\PopUpScreen.cs" />
+    <Compile Include="States\Engine\SplashScreen.cs" />
+    <Compile Include="Utilities\DrawLine.cs" />
+    <Compile Include="Utilities\DrawPrimitives.cs" />
+    <Compile Include="Utilities\DrawShape.cs" />
+    <Compile Include="Utilities\DrawString.cs" />
+    <Compile Include="Utilities\GameText.cs" />
+    <Compile Include="Utilities\Panel.cs" />
+    <Compile Include="Utilities\Shapes\Line.cs" />
+    <Compile Include="Utilities\Utility.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="MonoGame.Framework">
+      <HintPath>$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\Windows\MonoGame.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Textures\UnTexturedTile.png" />
+    <Content Include="Textures\terrainTile1.png" />
+    <Content Include="Textures\terrainTile2.png" />
+    <Content Include="Textures\terrainTile3.png" />
+    <Content Include="Textures\terrainTile4.png" />
+    <Content Include="Textures\terrainTile5.png" />
+    <Content Include="Textures\Tile3.png" />
+    <Content Include="Textures\Tile1.png" />
+    <Content Include="Textures\Tile2.png" />
+    <Content Include="Icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <MonoGameContentReference Include="Content\Content.mgcb" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <None Include="AceIcon1" />
+    <None Include="Properties\app.manifest" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
