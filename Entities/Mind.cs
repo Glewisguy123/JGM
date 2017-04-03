@@ -113,10 +113,11 @@ namespace Engine.Entities
         public virtual void OnSATCollision(object sender, CollisionEventArgs e)
         {
             if(e.A== this)
-            velocity += (e.mtvRet * iMass);
+            ApplyImpulse(-e.mtvRet);
             else if (e.B == this)
-                velocity -= (e.mtvRet * iMass);
+                ApplyImpulse(e.mtvRet);
 
+            //UpdatePhysics();
         }
 
         public virtual void Unload()
@@ -137,17 +138,10 @@ namespace Engine.Entities
                 e.isVisible = false;
             }
 
-         
+            UpdatePhysics();
 
-            for (int i = 0; i < Hits.Count; i++)
-            {
-                Hits[i].Velocity = Velocity;
-            }
 
-            for (int i = 0; i < Hits.Count; i++)
-            {
-                Hits[i].UpdatePoint(Velocity);
-            }
+            //UpdatePhysics();
         }
 
         public void Link(IEntity e)
@@ -158,21 +152,42 @@ namespace Engine.Entities
         #region GrantsMethods
         public void ApplyForce(Vector2 force)
         {
+            //F = ma
+            //Therefore a = F/m but we are using inverse mass because multiplication is quicker than division, thus m is set to be equal to 1/m so we can do a = F * m
             Acceleration += (force * Mass);
         }
 
         public void UpdatePhysics()
         {
+            //Apply the damping force to decelerate the player
             Velocity *= Damping;
+            //Accelerate the entity
             Velocity += Acceleration;
+            //Update position
             _pos += Velocity;
+
+            //Set the velocity of each hitbox to be equal to the velocity of the entity's mind
+            for (int i = 0; i < Hits.Count; i++)
+            {
+                Hits[i].Velocity = Velocity;
+            }
+            //Update the location of each hitbpx based on the velocity
+            for (int i = 0; i < Hits.Count; i++)
+            {
+                Hits[i].UpdatePoint(Velocity);
+            }
+
+            //Reset acceleration
             Acceleration = Vector2.Zero;
         }
 
         public void ApplyImpulse(Vector2 cVelocity)
         {
+            //Multiply the velocity by the "bounciness" of the material
             cVelocity *= Restitution;
-            Acceleration += ((cVelocity * Mass) * Damping);
+            //Update acceleration
+            ApplyForce(cVelocity);
+            //Acceleration += ((cVelocity * Mass) * Damping);
         }
         #endregion
     }

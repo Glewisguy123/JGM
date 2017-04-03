@@ -15,7 +15,6 @@ using ADS.Collision.SAT;
 using Engine.Events.CollisionEvent;
 using Engine.Managers.Collision;
 using ADS.Grid.Generation.New;
-using Engine.Events.KeyboardEvent;
 
 namespace ADS.Entities.Steering
 {
@@ -34,7 +33,7 @@ namespace ADS.Entities.Steering
         private Vector2 direction;
         //private Vector2 velocity;
         private Vector2 DesiredVelocity;
-        public Vector2 steeringForce;
+        private Vector2 steeringForce;
         private Vector2 position;
         private SpriteBatch sb;
        // private Player target;
@@ -48,13 +47,9 @@ namespace ADS.Entities.Steering
 
         Vector2 vel;
 
-        public IEntity current;
-
-        SteeringBehaviour currentBehav;
+        IEntity current;
 
         Vector2 mousPos;
-
-
 
         /// <summary>
         /// A list of all
@@ -68,15 +63,12 @@ namespace ADS.Entities.Steering
 
         public List<Node> Pathway { get; private set; }
 
-        private DemoState currentS = DemoState.Seek;
-
         public override void Initialize(Vector2 Position)
         {
             texPath = "AntiBody";
             //Allow other steering entities to acknowledge this entity
             neighbours.Add(this);
             Locator.Instance.getService<MouseHandler>().MouseMoved += OnMouseMoved;
-                Locator.Instance.getService<KeyHandler>().KeyDown += OnKeyDown;
 
             current = Locator.Instance.getService<EntityManager>().getCamEntity("Player");
             position = Position;
@@ -84,13 +76,11 @@ namespace ADS.Entities.Steering
             Mass = 0.1f;
             Restitution = 0.00001f;
             Damping = 0.97f;
-           // currentBehave = new Arrival(this);
+            //Hits.Add(new Hitbox(new Vector2(Position.X, Position.Y + 3), 16, 7, 45, this));
+            //Hits.Add(new Hitbox(new Vector2(Position.X + 16, Position.Y + 3), 16, 7, -45, this));
+            //Hits.Add(new Hitbox(new Vector2(Position.X + 12, Position.Y + 16), 8, 17, 0, this));
 
-//Hits.Add(new Hitbox(new Vector2(Position.X, Position.Y + 3), 16, 7, 45, this));
-//Hits.Add(new Hitbox(new Vector2(Position.X + 16, Position.Y + 3), 16, 7, -45, this));
-//Hits.Add(new Hitbox(new Vector2(Position.X + 12, Position.Y + 16), 8, 17, 0, this));
-
-base.Initialize(Position);
+            base.Initialize(Position);
         }
 
         public void Wander()
@@ -156,36 +146,14 @@ base.Initialize(Position);
 
         public override void Update(GameTime gameTime)
         {
-
-
-            
+            //Find way to "Find" the player via is name (hint entity manager lel)
+            // Seek(current.Position);
+            //Seek(current.Position);
             velocity = Velocity;
             position = Position;
+            velocity = flockBehaviour(velocity);
 
-
-             velocity = flockBehaviour(velocity);
-            //currentBehave.Update();
-            //position = currentBehave.ApplyBehaviour()[0];
-            //velocity = currentBehave.ApplyBehaviour()[1];
-            //steeringForce = currentBehave.ApplyBehaviour()[2];
-            switch(currentS)
-                {
-                case DemoState.Seek:
-                    Seek(current.Position);
-                    break;
-                case DemoState.Flee:
-                    Flee(current.Position);
-                    break;
-                case DemoState.Persuit:
-                    Pursue(current.Position, current.Velocity);
-                    break;
-                case DemoState.Evade:               
-                    Evade(current.Position, current.Velocity);
-                    break;
-
-            }
-
-            //  Arrival(current.Position,150f);
+            Seek(current.Position);
 
             // position = _pos;
             // Pursue(current.Position,current.Velocity);
@@ -242,10 +210,10 @@ base.Initialize(Position);
             steeringForce = steeringForce / mass;
             //Adjust velocity with the steering force
             velocity += steeringForce;
-
+    
             //Apply velocity to pos
-            position += velocity;
-
+             position += velocity;
+            
         }
         /// <summary>
         /// 
@@ -311,11 +279,12 @@ base.Initialize(Position);
                 Seek(Truncate(Target + steeringForce * T, MaxVelocity ));
                                 Console.WriteLine("Inside");
 
+                // Pursue(Target, current.Velocity);
             }
             else
             {
                 Seek(Target);
-                
+                //Seek(Target);
             }
         }
         #endregion
@@ -474,28 +443,6 @@ base.Initialize(Position);
 
             Vector2 result = new Vector2(Matrix.CreateScale(i).Translation.X, Matrix.CreateScale(i).Translation.Y);
             return result;
-        }
-
-
-        public void OnKeyDown(object source, KeyEventArgs e)
-        {
-            if (e.key == Microsoft.Xna.Framework.Input.Keys.Z)
-            {
-                currentS = DemoState.Seek;
-            }
-            if (e.key == Microsoft.Xna.Framework.Input.Keys.X)
-            {
-                currentS = DemoState.Flee;
-            }
-            
-            if (e.key == Microsoft.Xna.Framework.Input.Keys.C)
-            {
-                currentS = DemoState.Persuit;
-            }
-            if (e.key == Microsoft.Xna.Framework.Input.Keys.V)
-            {
-                currentS = DemoState.Evade;
-            }
         }
         
     }

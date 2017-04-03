@@ -29,7 +29,7 @@ namespace Engine.Entities
         bool input = true;
 
         float maxSpeed = 3f;
-        float moveSpeed = 0.5f;
+        float moveSpeed = 0.2f;
 
         private Vector2 friction = new Vector2(0.1f, 0.1f);
 
@@ -55,11 +55,11 @@ namespace Engine.Entities
             texPath = "AntiBody";
 
             Mass = 0.5f;
-            Restitution = 0.00001f;
+            Restitution = 1f;
             Damping = 0.97f;
-            Hits.Add(new Hitbox(new Vector2(Position.X, Position.Y + 3), 16, 7, 45, this));
-            Hits.Add(new Hitbox(new Vector2(Position.X + 16, Position.Y + 3), 16, 7, -45, this));
-            Hits.Add(new Hitbox(new Vector2(Position.X + 12, Position.Y + 16), 8, 17, 0, this));
+            Hits.Add(new Hitbox(new Vector2(Position.X, Position.Y + 3), 16, 6, 45, this));
+            Hits.Add(new Hitbox(new Vector2(Position.X + 16, Position.Y + 3), 16, 6, -45, this));
+            Hits.Add(new Hitbox(new Vector2(Position.X + 12, Position.Y + 16), 4, 16, 0, this));
             base.Initialize(Position);
         }
 
